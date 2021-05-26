@@ -12,7 +12,7 @@ class ImageHandler:
             file_name = full_file_name.split('-')[1]
             ucode = file_name.split('.')[0]
             # print(ucode)
-            self.file_name_ucode_list.append(tuple(full_file_name, file_name, ucode))
+            self.file_name_ucode_list.append([full_file_name, file_name, ucode])
 
 
     def connect_and_send_to_S3_bucket(self):
@@ -25,7 +25,8 @@ class ImageHandler:
         )
 
         for full_file_name, file_name, ucode in self.file_name_ucode_list:
-            s3.Bucket('cheez-willikers').upload_file(Filename=full_file_name, Key=file_name)
+            # print(full_file_name, file_name, ucode)
+            s3.Bucket('kwikpic_selfies').upload_file(Filename=full_file_name, Key=file_name)
 
 
 
